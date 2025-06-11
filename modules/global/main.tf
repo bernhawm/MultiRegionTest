@@ -37,6 +37,13 @@ data "aws_iam_policy_document" "allow_msk_access" {
   }
 }
 
-output "bucket_name" {
-  value = aws_s3_bucket.msk_logs.id
-}
+
+
+
+
+
+
+#######################################
+###################Replicator
+#######################################
+

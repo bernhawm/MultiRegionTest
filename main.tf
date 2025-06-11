@@ -51,3 +51,16 @@ module "us-east-1" {
     aws = aws.us-east-1
   }
 }
+
+module "replicator" {
+  source = "./modules/replicator"
+
+  source_cluster_arn      = module.us-east-2.msk_cluster_arn
+  destination_cluster_arn = module.us-east-1.msk_cluster_arn
+  name                    = "useast2-to-useast1"
+  tags                    = "replication"
+
+  providers = {
+    aws = aws.us-east-1
+  }
+}
