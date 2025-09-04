@@ -57,6 +57,10 @@ module "replicator" {
 
   source_cluster_arn      = module.us-east-2.msk_cluster_arn
   destination_cluster_arn = module.us-east-1.msk_cluster_arn
+  source_subnet_ids       = module.us-east-2.subnet_ids
+  destination_subnet_ids  = module.us-east-1.subnet_ids
+  source_security_group_ids = module.us-east-2.msk_security_group_ids
+  destination_security_group_ids = module.us-east-1.msk_security_group_ids
   name                    = "useast2-to-useast1"
   tags                    = "replication"
 

@@ -26,8 +26,13 @@
 # }
 
 
-resource "aws_cloudwatch_log_group" "test" {
-  name = "msk_broker_logs"
+resource "aws_cloudwatch_log_group" "msk_logs" {
+  name = "msk_broker_logs_${var.region}"
+  retention_in_days = 7
+  tags = {
+    Environment = var.tags
+    Region      = var.region
+  }
 }
 
 resource "aws_kms_key" "kms" {
@@ -77,7 +82,7 @@ resource "aws_msk_cluster" "example" {
     broker_logs {
       cloudwatch_logs {
         enabled   = true
-        log_group = "msk_broker_logs_${var.region}"
+        log_group = aws_cloudwatch_log_group.msk_logs.name
       }
    
       s3 {
